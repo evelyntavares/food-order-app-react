@@ -43,13 +43,15 @@ function removeItemFromCart(state, existingItemIndex) {
 }
 
 function cartReducer(state, action) {
+  let updatedItems = [];
+
   switch (action.type) {
     case "ADD_ITEM":
       const existingItemIndex = state.items.findIndex(
         (item) => item.id === action.item.id
       );
 
-      const updatedItems = addItemToCart(state, existingItemIndex, action);
+      updatedItems = addItemToCart(state, existingItemIndex, action);
       return { ...state, items: updatedItems };
 
     case "REMOVE_ITEM":
@@ -57,8 +59,8 @@ function cartReducer(state, action) {
         (item) => item.id === action.id
       );
 
-      const updatedItemss = removeItemFromCart(state, itemToBeRemovedIndex);
-      return { ...state, items: updatedItemss };
+      updatedItems = removeItemFromCart(state, itemToBeRemovedIndex);
+      return { ...state, items: updatedItems };
 
     default:
       return state;
